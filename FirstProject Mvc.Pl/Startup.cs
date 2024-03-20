@@ -32,10 +32,10 @@ namespace FirstProject_Mvc.Pl
             //services.AddScoped <DbContextOptions<ApplicationDbContext>>();
 
             services.AddDbContext<ApplicationDbContext>(
-                option => option.UseSqlServer("Server = DESKTOP-H7D87VE ; database = ApplicationMvc ;Trusted_Connection=True ; encrypt = false")
+                option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionStrings"))
 
 
-                ); 
+                ) ; 
 
             services.AddControllersWithViews();
         }
