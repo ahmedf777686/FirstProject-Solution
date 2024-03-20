@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.DAL.Data
 {
-    internal class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:DbContext
         
     {
-
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option ) :base(option)
+        {
+             
+        }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            
             optionsBuilder.UseSqlServer("Server = DESKTOP-H7D87VE ; database = ApplicationMvc ;Trusted_Connection=True ; encrypt = false");
 
         }

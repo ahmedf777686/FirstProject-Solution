@@ -1,6 +1,8 @@
+using FirstProject_Mvc.DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +25,18 @@ namespace FirstProject_Mvc.Pl
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+            //applicationDbContext.//
+
+            //services.AddScoped<ApplicationDbContext>();
+            //services.AddScoped <DbContextOptions<ApplicationDbContext>>();
+
+            services.AddDbContext<ApplicationDbContext>(
+                option => option.UseSqlServer("Server = DESKTOP-H7D87VE ; database = ApplicationMvc ;Trusted_Connection=True ; encrypt = false")
+
+
+                ); 
+
             services.AddControllersWithViews();
         }
 
