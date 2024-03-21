@@ -1,4 +1,5 @@
-﻿using FirstProject_Mvc.PLL.interfaces;
+﻿using FirstProject_Mvc.DAL.Models;
+using FirstProject_Mvc.PLL.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstProject_Mvc.Pl.Controllers
@@ -16,6 +17,25 @@ namespace FirstProject_Mvc.Pl.Controllers
         {
             var result = IdepartmentRepository.GetAll();
             return View(result);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Department department)
+        {
+            if (ModelState.IsValid)
+            {
+                var count = IdepartmentRepository.Add(department);
+                if(count > 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(department);
         }
     }
 }

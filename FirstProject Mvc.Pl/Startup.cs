@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using FirstProject_Mvc.PLL.Repository;
 namespace FirstProject_Mvc.Pl
 {
     public class Startup
@@ -40,7 +40,7 @@ namespace FirstProject_Mvc.Pl
 
             services.AddControllersWithViews();
 
-            services.AddScoped<IdepartmentRepository,IdepartmentRepository>();
+            services.AddScoped<IdepartmentRepository, DepartmentRepository >();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

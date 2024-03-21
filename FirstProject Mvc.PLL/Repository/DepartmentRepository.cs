@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.PLL.Repository
 {
-    internal class DepartmentRepository : IdepartmentRepository
+    public class DepartmentRepository : IdepartmentRepository
     {
         public DepartmentRepository(ApplicationDbContext _context)
         {

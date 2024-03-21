@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Department>
+
 @{
 	ViewData["Title"] = "Index";
 }
@@ -10,7 +11,7 @@
 <br />
 <br />
 
-<a asp-controller="Department" asp-action="index" class="btn btn-primary">Create new Department</a>
+<a asp-controller="Department" asp-action="create" class="btn btn-primary">Create new Department</a>
 
 <br />
 
@@ -49,7 +50,7 @@
 	</table>
 }
 else{
-	<dev class="mt-5 alert-danger alert">
+	<dev class="mt-5 w-75 alert-danger alert">
 
 		<h3>There is No Department :(</h3>
 
