@@ -1,4 +1,5 @@
 using FirstProject_Mvc.DAL.Data;
+using FirstProject_Mvc.PLL.interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,8 @@ namespace FirstProject_Mvc.Pl
                 ) ; 
 
             services.AddControllersWithViews();
+
+            services.AddScoped<IdepartmentRepository,IdepartmentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
