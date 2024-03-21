@@ -14,7 +14,8 @@ namespace FirstProject_Mvc.Pl.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var result = IdepartmentRepository.GetAll();
+            return View(result);
         }
     }
 }
