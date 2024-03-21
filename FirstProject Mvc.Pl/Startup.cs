@@ -16,7 +16,7 @@ namespace FirstProject_Mvc.Pl
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
+        { 
             Configuration = configuration;
         }
 
@@ -34,7 +34,7 @@ namespace FirstProject_Mvc.Pl
             services.AddDbContext<ApplicationDbContext>(
                 option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionStrings"))
 
-
+                
                 ) ; 
 
             services.AddControllersWithViews();

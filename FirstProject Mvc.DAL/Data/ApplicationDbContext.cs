@@ -17,12 +17,12 @@ namespace FirstProject_Mvc.DAL.Data
              
         }
         
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
             
-            optionsBuilder.UseSqlServer("Server = DESKTOP-H7D87VE ; database = ApplicationMvc ;Trusted_Connection=True ; encrypt = false");
+        //   // optionsBuilder.UseSqlServer("Server = DESKTOP-H7D87VE ; database = ApplicationMvc ;Trusted_Connection=True ; encrypt = false");
 
-        }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
