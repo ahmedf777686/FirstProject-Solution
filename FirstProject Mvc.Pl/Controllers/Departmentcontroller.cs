@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirstProject_Mvc.Pl.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class Departmentcontroller : Controller
     {
         public Departmentcontroller(IdepartmentRepository idepartmentRepository)
