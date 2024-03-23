@@ -14,8 +14,8 @@ namespace FirstProject_Mvc.DAL.Data.Configurations
         public void Configure(EntityTypeBuilder<Department> builder)
         {
             builder.Property(d => d.ID).UseIdentityColumn(10, 10);
-            builder.Property(d => d.Name).IsRequired().HasColumnType("varchar");
-            builder.Property(d => d.Code).IsRequired().HasColumnType("varchar");
+            //builder.Property(d => d.Name).IsRequired().HasColumnType("varchar");
+            //builder.Property(d => d.Code).IsRequired().HasColumnType("varchar");
         }
     }
 
