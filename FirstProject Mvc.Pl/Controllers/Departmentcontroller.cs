@@ -48,5 +48,35 @@ namespace FirstProject_Mvc.Pl.Controllers
             var department = IdepartmentRepository.Get(id.Value);
             return View(department);
         }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
+            var department = IdepartmentRepository.Get(id.Value);
+            return View(department);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Department de)
+        {
+            if (de is null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                IdepartmentRepository.Update(de);
+                return RedirectToAction(nameof(Index));
+            }
+
+            
+            return View(de);
+        }
     }
+
 }
