@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit @Model.Name Department </h1>
+<h1 class="text-info">Edit @Model.Name Department </h1>
 
 <form asp-action="Edit">
     <dev class="form-group ">
@@ -24,7 +24,8 @@
 
 
     </dev>
-    <input type="submit" value="save" class="btn btn-danger" />
+    <br/>
+    <input type="submit" value="save" class="btn btn-info" /> |
     <a class="btn btn-outline-info" asp-action="index" asp-controller="department"> Back To List</a>
 </form>
 

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirstProject_Mvc.Pl.Controllers
 {
-    [ValidateAntiForgeryToken]
+  //  [ValidateAntiForgeryToken]
     public class Departmentcontroller : Controller
     {
         public Departmentcontroller(IdepartmentRepository idepartmentRepository)
@@ -41,7 +41,7 @@ namespace FirstProject_Mvc.Pl.Controllers
 
 
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id ,string ViewName = "Details")
         {
             if(id is null)
             {
@@ -55,13 +55,18 @@ namespace FirstProject_Mvc.Pl.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id is null)
-            {
-                return BadRequest();
-            }
 
-            var department = IdepartmentRepository.Get(id.Value);
-            return View(department);
+            ///if (id is null)
+            ///{
+            ///    return BadRequest();
+            ///}
+            ///
+            ///var department = IdepartmentRepository.Get(id.Value);
+            ///return View(department);
+
+
+            return Details(id, "Edit");
+        
         }
 
         [HttpPost]
@@ -82,10 +87,18 @@ namespace FirstProject_Mvc.Pl.Controllers
         }
 
 
-        public ActionResult Delete()
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
-            return View();
+            return Details(id, "Delete");
         }
-    }
+        public IActionResult Delete(Department department)
+        {
+			IdepartmentRepository.Delete(department);
+            return RedirectToAction(nameof(Index));
+
+		}
+
+	}
 
 }
