@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.DAL.Data
 {
+
+
     public class ApplicationDbContext:DbContext
         
     {
