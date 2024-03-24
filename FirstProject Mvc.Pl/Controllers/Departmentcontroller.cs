@@ -39,6 +39,8 @@ namespace FirstProject_Mvc.Pl.Controllers
             return View(department);
         }
 
+
+
         public ActionResult Details(int? id)
         {
             if(id is null)
@@ -76,7 +78,13 @@ namespace FirstProject_Mvc.Pl.Controllers
             }
 
             
-            return View(de);
+       
+        }
+
+
+        public ActionResult Delete()
+        {
+            return View();
         }
     }
 
