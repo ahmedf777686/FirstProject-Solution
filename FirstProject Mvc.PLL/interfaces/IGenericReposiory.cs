@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.PLL.interfaces
 {
-	public interface IGenericReposiory<T> where T : Modlebase
+	public interface IGenericReposiory<T> where T : class
 	{
 		public IEnumerable<T> GetAll();
 

@@ -8,6 +8,6 @@ namespace FirstProject_Mvc.DAL.Models
 {
 	public class Modlebase
 	{
-		public int Id { get; set; }
+		public int ID { get; set; }
 	}
 }

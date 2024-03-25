@@ -23,10 +23,10 @@ namespace FirstProject_Mvc.DAL.Models
 		PartTime
 	}
 
-	public class Employee :Modlebase
+	public class Employee 
 	{
 
-		//public int Id { get; set; }
+		public int id { get; set; }
 		[Required]
 		[MaxLength(50, ErrorMessage = "Name is Required !")]
 		[MinLength(5, ErrorMessage = "Min length of Name  is 5 chars")]
@@ -40,7 +40,7 @@ namespace FirstProject_Mvc.DAL.Models
 		[DataType(DataType.Currency)]
 		public decimal Salary { get; set; }
 		[Display(Name = "Is Active")]
-		public string IsActive { get; set; }
+		public bool IsActive { get; set; }
 		[EmailAddress]
 
 		public string Email { get; set; }

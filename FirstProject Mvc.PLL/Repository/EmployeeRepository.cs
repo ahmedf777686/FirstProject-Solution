@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.PLL.Repository
 {
-	internal class EmployeeRepository : GenericRepoisory<Employee>,IEmployeeRepository
+	public class EmployeeRepository : GenericRepoisory<Employee>,IEmployeeRepository
 	{
 		private readonly ApplicationDbContext _application;
 

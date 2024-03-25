@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.PLL.Repository
 {
-	public class GenericRepoisory<T> : IGenericReposiory<T> where T : Modlebase
+	public class GenericRepoisory<T> : IGenericReposiory<T> where T : class
 	{
 		private  readonly ApplicationDbContext _dbContext;
 
@@ -31,7 +31,7 @@ namespace FirstProject_Mvc.PLL.Repository
 
 		public T Get(int id)
 		{
-			return _dbContext.Set<T>().Find();
+			return _dbContext.Set<T>().Find(id);
 
 		}
 
