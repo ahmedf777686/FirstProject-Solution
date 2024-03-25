@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.DAL.Models
 { // Model 
-    public class Department
+    public class Department :Modlebase
     {
-        public int ID { get; set; }
+      //  public int ID { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

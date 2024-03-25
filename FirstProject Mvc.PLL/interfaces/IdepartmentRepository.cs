@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.PLL.interfaces
 {
-    public interface IdepartmentRepository
+    public interface IdepartmentRepository : IGenericReposiory<Department>
     {
-        public IEnumerable<Department> GetAll();
+        //public IEnumerable<Department> GetAll();
 
-        public Department Get(int id);
+        //public Department Get(int id);
 
-        public int Delete(Department department);
-        public int Update(Department department);
-        public int Add(Department department);
+        //public int Delete(Department department);
+        //public int Update(Department department);
+        //public int Add(Department department);
 
 
     }

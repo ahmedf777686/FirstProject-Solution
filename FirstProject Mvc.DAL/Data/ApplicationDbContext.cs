@@ -31,5 +31,6 @@ namespace FirstProject_Mvc.DAL.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
         public DbSet<Department> departments { get; set; }
+        public DbSet<Employee> Employee { get; set; }
     }
 }

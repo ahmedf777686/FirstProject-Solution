@@ -23,10 +23,10 @@ namespace FirstProject_Mvc.DAL.Models
 		PartTime
 	}
 
-	public class Employee
+	public class Employee :Modlebase
 	{
 
-		public int Id { get; set; }
+		//public int Id { get; set; }
 		[Required]
 		[MaxLength(50, ErrorMessage = "Name is Required !")]
 		[MinLength(5, ErrorMessage = "Min length of Name  is 5 chars")]
