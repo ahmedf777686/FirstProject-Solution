@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.DAL.Models
 {
+
 	public enum Gender
 	{
 		[EnumMember(Value = "Male")]
@@ -16,7 +17,6 @@ namespace FirstProject_Mvc.DAL.Models
 		[EnumMember(Value = "Female")]
 		Female
 	}
-
 	public enum EmpType
 	{
 		FullTime = 1,
