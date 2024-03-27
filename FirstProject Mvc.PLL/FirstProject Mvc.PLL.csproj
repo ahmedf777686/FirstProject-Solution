@@ -5,4 +5,8 @@
     <RootNamespace>FirstProject_Mvc.PLL</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FirstProject Mvc.DAL\FirstProject Mvc.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
