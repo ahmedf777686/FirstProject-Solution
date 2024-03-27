@@ -36,16 +36,8 @@
 				<tr>
 					<td>@item.Code</td>
 					<td>@item.Name</td>
-					<td>@item.DateOfCreation</td> 
-					<td>
-						<a asp-route-id="@item.ID" asp-action="Details" asp-controller="Department" class="btn btn-warning"> <i class="fas fa-eye"></i> Details</a>
-					</td>
-					<td>
-						<a asp-route-id="@item.ID" asp-action="Edit" asp-controller="Department" class="btn alert-danger"><i class="fas fa-edit"></i> Update</a>
-					</td>
-					<td>
-						<a asp-route-id="@item.ID" asp-action="Delete" asp-controller="Department" class="btn btn-primary"> <i class="fas fa-trash"></i> Delete</a>
-					</td>
+					<td>@item.DateOfCreation</td>
+					<partial name="_Buttonspartial" model="@item.ID"></partial>
 				</tr>
 
 			}
