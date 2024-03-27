@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.DAL.Models
 {
-
+	 
 	public enum Gender
 	{
 		[EnumMember(Value = "Male")]
