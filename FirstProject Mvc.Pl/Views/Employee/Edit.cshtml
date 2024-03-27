@@ -1,0 +1,82 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-info">Edit @Model.Name Employee</h1>
+
+<form asp-action="Edit">
+
+
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="Name"></label>
+		<input class="form-control" asp-for="Name" />
+		<span asp-validation-for="Name"></span>
+	</dev>
+
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="Email"></label>
+		<input class="form-control" asp-for="Email" />
+		<span asp-validation-for="Email"></span>
+	</dev>
+
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="Address"></label>
+		<input class="form-control" asp-for="Address" />
+		<span asp-validation-for="Address"></span>
+	</dev>
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="Age"></label>
+		<input class="form-control" asp-for="Age" />
+		<span asp-validation-for="Age"></span>
+	</dev>
+
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="Salary"></label>
+		<input class="form-control" asp-for="Salary" />
+		<span asp-validation-for="Salary"></span>
+	</dev>
+
+
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="Gender"></label>
+		<input class="form-control" asp-for="Gender" />
+		<span asp-validation-for="Gender"></span>
+	</dev>
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="IsActive"></label>
+		<input class="form-ch" asp-for="IsActive" />
+		<span asp-validation-for="IsActive"></span>
+	</dev>
+	<br />
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="PhoneNumber"></label>
+		<input class="form-control" asp-for="PhoneNumber" />
+		<span asp-validation-for="PhoneNumber"></span>
+	</dev>
+
+
+
+	@*    <dev class="form-group ">
+	<label class="col-form-label  " asp-for="EmpType"></label>
+	<input class="form-control" asp-for="EmpType" />
+	<span asp-validation-for="EmpType"></span>
+	</dev> *@
+
+	<dev class="form-group ">
+		<label class="col-form-label  " asp-for="HiringDate"></label>
+		<input class="form-control" asp-for="HiringDate" />
+		<span asp-validation-for="HiringDate"></span>
+	</dev>
+	<br />
+
+	<input  type="submit" value="Save" class="btn btn-danger" /> |
+
+	<a class="btn btn-outline-info" asp-action="index" asp-controller="employee"> Back To List</a>
+
+</form>
+@section script {
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}
