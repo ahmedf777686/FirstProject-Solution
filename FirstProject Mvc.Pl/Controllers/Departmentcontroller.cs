@@ -16,7 +16,10 @@ namespace FirstProject_Mvc.Pl.Controllers
 
         public IActionResult Index()
         {
-            var result = IdepartmentRepository.GetAll();
+			
+			ViewData["Message"] = "Hello from ViewData!";
+			ViewBag.Message = "Hello from ViewBag!";
+			var result = IdepartmentRepository.GetAll();
             return View(result);
         }
         [HttpGet]
