@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FirstProject_Mvc.PLL.Repository;
+
 namespace FirstProject_Mvc.Pl
 {
     public class Startup
@@ -36,8 +37,14 @@ namespace FirstProject_Mvc.Pl
                 option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionStrings"))
 
                 
-                ) ; 
+                ) ;
 
+   //         services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+   //         {
+   //             ProgressBar = true,
+   //             PositionClass =ToastPositions.TopRight,
+   //             CloseButton = true
+			//});
             services.AddControllersWithViews();
 
             services.AddScoped<IdepartmentRepository, DepartmentRepository >();

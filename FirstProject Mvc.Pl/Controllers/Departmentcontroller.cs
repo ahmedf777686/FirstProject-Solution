@@ -2,6 +2,7 @@
 using FirstProject_Mvc.PLL.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace FirstProject_Mvc.Pl.Controllers
 {
   //  [ValidateAntiForgeryToken]
@@ -10,11 +11,13 @@ namespace FirstProject_Mvc.Pl.Controllers
         public Departmentcontroller(IdepartmentRepository idepartmentRepository)
         {
             IdepartmentRepository = idepartmentRepository;
-        }
+		
+		}
 
         public IdepartmentRepository IdepartmentRepository { get; }
+	
 
-        public IActionResult Index()
+		public IActionResult Index()
         {
 			
 			//ViewData["Message"] = "Hello from ViewData!";
@@ -37,7 +40,9 @@ namespace FirstProject_Mvc.Pl.Controllers
                 if(count > 0)
                 {
                     //TempData["Message"] = "Department is created SuccessFully ";
-                    return RedirectToAction(nameof(Index));
+                   // ToastNotification.AddSuccessToastMessage("Department is created SuccessFully");
+
+					return RedirectToAction(nameof(Index));
                 }
             }
             return View(department);
