@@ -17,8 +17,8 @@ namespace FirstProject_Mvc.Pl.Controllers
         public IActionResult Index()
         {
 			
-			ViewData["Message"] = "Hello from ViewData!";
-			ViewBag.Message = "Hello from ViewBag!";
+			//ViewData["Message"] = "Hello from ViewData!";
+			//ViewBag.Message = "Hello from ViewBag!";
 			var result = IdepartmentRepository.GetAll();
             return View(result);
         }
@@ -36,6 +36,7 @@ namespace FirstProject_Mvc.Pl.Controllers
                 var count = IdepartmentRepository.Add(department);
                 if(count > 0)
                 {
+                    //TempData["Message"] = "Department is created SuccessFully ";
                     return RedirectToAction(nameof(Index));
                 }
             }
