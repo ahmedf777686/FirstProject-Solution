@@ -17,7 +17,7 @@ namespace FirstProject_Mvc.DAL.Models
 		[Display(Name = "Date Of Creation")]
 		public DateTime DateOfCreation { get; set; }
 
-		public ICollection<Employee> employees { get; set; } = new HashSet<Employee>();
+		public virtual ICollection<Employee> employees { get; set; } = new HashSet<Employee>();
 
 	}
 }

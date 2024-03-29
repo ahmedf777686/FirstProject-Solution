@@ -1,4 +1,5 @@
-﻿using FirstProject_Mvc.DAL.Models;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using FirstProject_Mvc.DAL.Models;
 using FirstProject_Mvc.PLL.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,14 +9,14 @@ namespace FirstProject_Mvc.Pl.Controllers
   //  [ValidateAntiForgeryToken]
     public class Departmentcontroller : Controller
     {
-        public Departmentcontroller(IdepartmentRepository idepartmentRepository)
+        public Departmentcontroller(IdepartmentRepository idepartmentRepository , INotyfService notyf)
         {
             IdepartmentRepository = idepartmentRepository;
-		
+			Notyf = notyf;
 		}
 
         public IdepartmentRepository IdepartmentRepository { get; }
-	
+		public INotyfService Notyf { get; }
 
 		public IActionResult Index()
         {
@@ -40,8 +41,8 @@ namespace FirstProject_Mvc.Pl.Controllers
                 if(count > 0)
                 {
                     //TempData["Message"] = "Department is created SuccessFully ";
-                   // ToastNotification.AddSuccessToastMessage("Department is created SuccessFully");
-
+                    // ToastNotification.AddSuccessToastMessage("Department is created SuccessFully");
+                    Notyf.Success("Department is created SuccessFully");
 					return RedirectToAction(nameof(Index));
                 }
             }
@@ -87,6 +88,7 @@ namespace FirstProject_Mvc.Pl.Controllers
             }
             else
             {
+                Notyf.Success("Department is Update SuccessFully");
                 IdepartmentRepository.Update(de);
                 return RedirectToAction(nameof(Index));
             }
@@ -104,6 +106,7 @@ namespace FirstProject_Mvc.Pl.Controllers
         public IActionResult Delete(Department department)
         {
 			IdepartmentRepository.Delete(department);
+            Notyf.Error("Department is Update SuccessFully");
             return RedirectToAction(nameof(Index));
 
 		}

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FirstProject_Mvc.PLL.Repository;
+using AspNetCoreHero.ToastNotification;
 
 namespace FirstProject_Mvc.Pl
 {
@@ -38,6 +39,14 @@ namespace FirstProject_Mvc.Pl
 
                 
                 ) ;
+            services.AddNotyf(con =>
+            {
+
+                con.Position = NotyfPosition.TopRight;
+                con.DurationInSeconds = 10;
+                con.IsDismissable = true;
+
+			}) ;
 
    //         services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
    //         {

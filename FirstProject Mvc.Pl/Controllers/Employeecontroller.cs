@@ -1,4 +1,5 @@
-﻿using FirstProject_Mvc.DAL.Models;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using FirstProject_Mvc.DAL.Models;
 using FirstProject_Mvc.PLL.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,16 @@ namespace FirstProject_Mvc.Pl.Controllers
 	{
 
 
-		public Employeecontroller(IEmployeeRepository employeeRepository)
+		public Employeecontroller(IEmployeeRepository employeeRepository ,IdepartmentRepository idepartmentRepository,INotyfService notyf)
 		{
 			_EmployeeRepository = employeeRepository;
+			IdepartmentRepository = idepartmentRepository;
+			Notyf = notyf;
 		}
 
 		public IEmployeeRepository _EmployeeRepository { get; }
+		public IdepartmentRepository IdepartmentRepository { get; }
+		public INotyfService Notyf { get; }
 
 		// index
 		public IActionResult Index()
@@ -26,6 +31,7 @@ namespace FirstProject_Mvc.Pl.Controllers
 		// create Employee
 		public IActionResult Create()
 		{
+			ViewData["Department"] = IdepartmentRepository.GetAll();
 			return View();
 		}
 		[HttpPost]
@@ -36,6 +42,7 @@ namespace FirstProject_Mvc.Pl.Controllers
 				var Count = _EmployeeRepository.Add(employee);
 				if (Count > 0)
 				{
+					Notyf.Success("Employee is created SuccessFully", 2);
 					return RedirectToAction(nameof(Index));
 				}
 			}
@@ -45,6 +52,7 @@ namespace FirstProject_Mvc.Pl.Controllers
 
 		public IActionResult Details(int id)
 		{
+			ViewData["Department"] = IdepartmentRepository.GetAll();
 			var Emp = _EmployeeRepository.Get(id);
 
 			return View(Emp);
@@ -54,6 +62,7 @@ namespace FirstProject_Mvc.Pl.Controllers
 		// Edit Employee
 		public IActionResult Edit(int id)
 		{
+			ViewData["Department"] = IdepartmentRepository.GetAll();
 			var res = _EmployeeRepository.Get(id);
 			return View(res);
 		}
@@ -64,6 +73,7 @@ namespace FirstProject_Mvc.Pl.Controllers
 			if (ModelState.IsValid)
 			{
 				var res = _EmployeeRepository.Update(employee);
+				Notyf.Information("Employee is Update SuccessFully");
 				return RedirectToAction(nameof(Index));
 			}
 
@@ -74,6 +84,8 @@ namespace FirstProject_Mvc.Pl.Controllers
 		[HttpGet]
 		public IActionResult Delete(int id)
 		{
+			ViewData["Department"] = IdepartmentRepository.GetAll();
+
 			var res =_EmployeeRepository.Get(id);
 			return View(res);
 		}
@@ -88,7 +100,9 @@ namespace FirstProject_Mvc.Pl.Controllers
 			else
 			{
 				_EmployeeRepository.Delete(employee);
+				Notyf.Error("Employee is Delete SuccessFully");
 				return RedirectToAction(nameof(Index));
+				
 			}
 
 		}

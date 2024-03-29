@@ -1,6 +1,7 @@
 ﻿using FirstProject_Mvc.DAL.Data;
 using FirstProject_Mvc.DAL.Models;
 using FirstProject_Mvc.PLL.interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,12 @@ namespace FirstProject_Mvc.PLL.Repository
 		}
 
 		public IEnumerable<T> GetAll()
+			
 		{
+			if(typeof(T) == typeof(Employee))
+			{
+				return (IEnumerable<T>)_dbContext.Employee.Include(E => E.Department);
+			}
 			return _dbContext.Set<T>().ToList();
 		}
 
