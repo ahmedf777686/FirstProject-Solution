@@ -25,6 +25,8 @@ namespace FirstProject_Mvc.DAL.Data.Configurations
 				(genderstr) => (Gender) Enum.Parse(typeof(Gender), genderstr ,true)
 
 				);
+
+			
 		}
 	}
 }

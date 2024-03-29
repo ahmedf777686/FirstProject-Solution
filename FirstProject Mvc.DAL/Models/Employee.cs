@@ -56,5 +56,8 @@ namespace FirstProject_Mvc.DAL.Models
 		public Gender Gender { get; set; }
 
 		public EmpType EmpType { get; set; }
+
+		public int? DepartmentId { get; set; }
+		public Department Department { get; set; }
 	}
 }
