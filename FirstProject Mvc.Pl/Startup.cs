@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FirstProject_Mvc.PLL.Repository;
 using AspNetCoreHero.ToastNotification;
+using FirstProject_Mvc.Pl.Helpersprofile;
 
 namespace FirstProject_Mvc.Pl
 {
@@ -48,6 +49,7 @@ namespace FirstProject_Mvc.Pl
 
 			}) ;
 
+            services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
    //         services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
    //         {
    //             ProgressBar = true,

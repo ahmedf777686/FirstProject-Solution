@@ -1,7 +1,11 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using FirstProject_Mvc.DAL.Models;
+using FirstProject_Mvc.Pl.ViewsModels;
 using FirstProject_Mvc.PLL.interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FirstProject_Mvc.Pl.Controllers
 {
@@ -9,13 +13,15 @@ namespace FirstProject_Mvc.Pl.Controllers
 	{
 
 
-		public Employeecontroller(IEmployeeRepository employeeRepository ,IdepartmentRepository idepartmentRepository,INotyfService notyf)
+		public Employeecontroller(IMapper mapper,IEmployeeRepository employeeRepository ,IdepartmentRepository idepartmentRepository,INotyfService notyf)
 		{
+			Mapper = mapper;
 			_EmployeeRepository = employeeRepository;
 			IdepartmentRepository = idepartmentRepository;
 			Notyf = notyf;
 		}
 
+		public IMapper Mapper { get; }
 		public IEmployeeRepository _EmployeeRepository { get; }
 		public IdepartmentRepository IdepartmentRepository { get; }
 		public INotyfService Notyf { get; }
@@ -25,13 +31,17 @@ namespace FirstProject_Mvc.Pl.Controllers
 		{
 			if (string.IsNullOrEmpty(inputData))
 			{
+			
 				var result = _EmployeeRepository.GetAll();
-				return View(result);
+				var Emp = Mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(result);
+				return View(Emp);
 			}
 			else
 			{
-			var emp =	_EmployeeRepository.GetEmployeeByName(inputData);
-				return View(emp);
+
+			var result =_EmployeeRepository.GetEmployeeByName(inputData);
+				var Emp = Mapper.Map<IQueryable<Employee>, IQueryable<EmployeeViewModel>>(result);
+				return View(Emp);
 			}
 			
 		}
@@ -44,11 +54,12 @@ namespace FirstProject_Mvc.Pl.Controllers
 			return View();
 		}
 		[HttpPost]
-		public IActionResult Create(Employee employee)
+		public IActionResult Create(EmployeeViewModel employeeVM)
 		{
 			if (ModelState.IsValid)
 			{
-				var Count = _EmployeeRepository.Add(employee);
+				var emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVM);
+				var Count = _EmployeeRepository.Add(emp);
 				if (Count > 0)
 				{
 					Notyf.Success("Employee is created SuccessFully", 2);
@@ -56,15 +67,16 @@ namespace FirstProject_Mvc.Pl.Controllers
 				}
 			}
 
-			return View(employee);
+			return View(employeeVM);
 		}
 
 		public IActionResult Details(int id)
 		{
 			ViewData["Department"] = IdepartmentRepository.GetAll();
+			
 			var Emp = _EmployeeRepository.Get(id);
-
-			return View(Emp);
+			var Res = Mapper.Map<Employee, EmployeeViewModel>(Emp);
+			return View(Res);
 		}
 
 
@@ -73,15 +85,20 @@ namespace FirstProject_Mvc.Pl.Controllers
 		{
 			ViewData["Department"] = IdepartmentRepository.GetAll();
 			var res = _EmployeeRepository.Get(id);
-			return View(res);
+			var Emp = Mapper.Map<Employee, EmployeeViewModel>(res);
+			return View(Emp);
 		}
 
 		[HttpPost]
-		public IActionResult Edit(Employee employee)
+
+
+		public IActionResult Edit(EmployeeViewModel employeeVm)
 		{
 			if (ModelState.IsValid)
 			{
-				var res = _EmployeeRepository.Update(employee);
+				var emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVm);
+				var res = _EmployeeRepository.Update(emp);
+
 				Notyf.Information("Employee is Update SuccessFully");
 				return RedirectToAction(nameof(Index));
 			}
@@ -96,19 +113,21 @@ namespace FirstProject_Mvc.Pl.Controllers
 			ViewData["Department"] = IdepartmentRepository.GetAll();
 
 			var res =_EmployeeRepository.Get(id);
-			return View(res);
+			var emp = Mapper.Map<Employee, EmployeeViewModel>(res);
+			return View(emp);
 		}
 
 		[HttpPost]
-		public IActionResult Delete(Employee employee)
+		public IActionResult Delete(EmployeeViewModel  employeeVm)
 		{
-			if (employee is null)
+			if (employeeVm is null)
 			{
 				return BadRequest();
 			}
 			else
 			{
-				_EmployeeRepository.Delete(employee);
+				var Emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVm);
+				_EmployeeRepository.Delete(Emp);
 				Notyf.Error("Employee is Delete SuccessFully");
 				return RedirectToAction(nameof(Index));
 				
