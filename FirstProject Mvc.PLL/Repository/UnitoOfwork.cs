@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject_Mvc.PLL.Repository
 {
-	public class UnitOfwork : Iunitofwork
+	public class UnitOfwork : Iunitofwork ,IDisposable
 	{
 
 
@@ -26,6 +26,11 @@ namespace FirstProject_Mvc.PLL.Repository
         public int Complete()
 		{
 			return _DbContext.SaveChanges();
+		}
+
+		public void Dispose()
+		{
+			_DbContext.Dispose();
 		}
 	}
 }
