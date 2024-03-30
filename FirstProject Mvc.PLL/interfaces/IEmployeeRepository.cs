@@ -11,6 +11,6 @@ namespace FirstProject_Mvc.PLL.interfaces
 	{
 
 		public IQueryable<Employee>  GetEmpByAddress(string address);
-	
+		public IQueryable<Employee> GetEmployeeByName(String Name);
 	}
 }

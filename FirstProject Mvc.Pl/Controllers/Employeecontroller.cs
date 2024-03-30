@@ -21,10 +21,19 @@ namespace FirstProject_Mvc.Pl.Controllers
 		public INotyfService Notyf { get; }
 
 		// index
-		public IActionResult Index()
+		public IActionResult Index(string inputData)
 		{
-			var result = _EmployeeRepository.GetAll();
-			return View(result);
+			if (string.IsNullOrEmpty(inputData))
+			{
+				var result = _EmployeeRepository.GetAll();
+				return View(result);
+			}
+			else
+			{
+			var emp =	_EmployeeRepository.GetEmployeeByName(inputData);
+				return View(emp);
+			}
+			
 		}
 
 
