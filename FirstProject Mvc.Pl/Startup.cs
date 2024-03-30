@@ -59,7 +59,8 @@ namespace FirstProject_Mvc.Pl
             services.AddControllersWithViews();
 
             services.AddScoped<IdepartmentRepository, DepartmentRepository >();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository >();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<Iunitofwork, UnitOfwork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,17 +13,18 @@ namespace FirstProject_Mvc.Pl.Controllers
 	{
 
 
-		public Employeecontroller(IMapper mapper,IEmployeeRepository employeeRepository ,IdepartmentRepository idepartmentRepository,INotyfService notyf)
+		public Employeecontroller(Iunitofwork iunitofwork,IMapper mapper,INotyfService notyf)
 		{
+			_Unitofwork = iunitofwork;
 			Mapper = mapper;
-			_EmployeeRepository = employeeRepository;
-			IdepartmentRepository = idepartmentRepository;
+			
 			Notyf = notyf;
 		}
 
+		public Iunitofwork _Unitofwork { get; }
 		public IMapper Mapper { get; }
-		public IEmployeeRepository _EmployeeRepository { get; }
-		public IdepartmentRepository IdepartmentRepository { get; }
+		//public IEmployeeRepository _EmployeeRepository { get; }
+		//public IdepartmentRepository IdepartmentRepository { get; }
 		public INotyfService Notyf { get; }
 
 		// index
@@ -32,14 +33,14 @@ namespace FirstProject_Mvc.Pl.Controllers
 			if (string.IsNullOrEmpty(inputData))
 			{
 			
-				var result = _EmployeeRepository.GetAll();
+				var result = _Unitofwork.EmployeeRepository.GetAll();
 				var Emp = Mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(result);
 				return View(Emp);
 			}
 			else
 			{
 
-			var result =_EmployeeRepository.GetEmployeeByName(inputData);
+			var result = _Unitofwork.EmployeeRepository.GetEmployeeByName(inputData);
 				var Emp = Mapper.Map<IQueryable<Employee>, IQueryable<EmployeeViewModel>>(result);
 				return View(Emp);
 			}
@@ -50,7 +51,7 @@ namespace FirstProject_Mvc.Pl.Controllers
 		// create Employee
 		public IActionResult Create()
 		{
-			ViewData["Department"] = IdepartmentRepository.GetAll();
+			ViewData["Department"] = _Unitofwork.DepartmentRepository.GetAll();
 			return View();
 		}
 		[HttpPost]
@@ -59,8 +60,9 @@ namespace FirstProject_Mvc.Pl.Controllers
 			if (ModelState.IsValid)
 			{
 				var emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVM);
-				var Count = _EmployeeRepository.Add(emp);
-				if (Count > 0)
+				 _Unitofwork.EmployeeRepository.Add(emp);
+				var count = _Unitofwork.Complete();
+				if (count > 0)
 				{
 					Notyf.Success("Employee is created SuccessFully", 2);
 					return RedirectToAction(nameof(Index));
@@ -72,9 +74,9 @@ namespace FirstProject_Mvc.Pl.Controllers
 
 		public IActionResult Details(int id)
 		{
-			ViewData["Department"] = IdepartmentRepository.GetAll();
+			ViewData["Department"] = _Unitofwork.DepartmentRepository.GetAll();
 			
-			var Emp = _EmployeeRepository.Get(id);
+			var Emp = _Unitofwork.EmployeeRepository.Get(id);
 			var Res = Mapper.Map<Employee, EmployeeViewModel>(Emp);
 			return View(Res);
 		}
@@ -83,8 +85,8 @@ namespace FirstProject_Mvc.Pl.Controllers
 		// Edit Employee
 		public IActionResult Edit(int id)
 		{
-			ViewData["Department"] = IdepartmentRepository.GetAll();
-			var res = _EmployeeRepository.Get(id);
+			ViewData["Department"] = _Unitofwork.DepartmentRepository.GetAll();
+			var res = _Unitofwork.EmployeeRepository.Get(id);
 			var Emp = Mapper.Map<Employee, EmployeeViewModel>(res);
 			return View(Emp);
 		}
@@ -97,8 +99,8 @@ namespace FirstProject_Mvc.Pl.Controllers
 			if (ModelState.IsValid)
 			{
 				var emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVm);
-				var res = _EmployeeRepository.Update(emp);
-
+			 _Unitofwork.EmployeeRepository.Update(emp);
+				_Unitofwork.Complete();
 				Notyf.Information("Employee is Update SuccessFully");
 				return RedirectToAction(nameof(Index));
 			}
@@ -110,9 +112,9 @@ namespace FirstProject_Mvc.Pl.Controllers
 		[HttpGet]
 		public IActionResult Delete(int id)
 		{
-			ViewData["Department"] = IdepartmentRepository.GetAll();
+			ViewData["Department"] = _Unitofwork.DepartmentRepository.GetAll();
 
-			var res =_EmployeeRepository.Get(id);
+			var res = _Unitofwork.EmployeeRepository.Get(id);
 			var emp = Mapper.Map<Employee, EmployeeViewModel>(res);
 			return View(emp);
 		}
@@ -127,7 +129,8 @@ namespace FirstProject_Mvc.Pl.Controllers
 			else
 			{
 				var Emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVm);
-				_EmployeeRepository.Delete(Emp);
+				_Unitofwork.EmployeeRepository.Delete(Emp);
+				var count = _Unitofwork.Complete();
 				Notyf.Error("Employee is Delete SuccessFully");
 				return RedirectToAction(nameof(Index));
 				

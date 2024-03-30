@@ -9,12 +9,14 @@ namespace FirstProject_Mvc.Pl.Controllers
 	//  [ValidateAntiForgeryToken]
 	public class Departmentcontroller : Controller
 	{
-		public Departmentcontroller(IdepartmentRepository idepartmentRepository, INotyfService notyf)
+		public Departmentcontroller(Iunitofwork Unitofwork,IdepartmentRepository idepartmentRepository, INotyfService notyf)
 		{
+			Unitofwork = Unitofwork;
 			IdepartmentRepository = idepartmentRepository;
 			Notyf = notyf;
 		}
 
+		public Iunitofwork Unitofwork { get; }
 		public IdepartmentRepository IdepartmentRepository { get; }
 		public INotyfService Notyf { get; }
 
@@ -61,7 +63,8 @@ namespace FirstProject_Mvc.Pl.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var count = IdepartmentRepository.Add(department);
+				IdepartmentRepository.Add(department);
+				var count = Unitofwork.Complete();
 				if (count > 0)
 				{
 					//TempData["Message"] = "Department is created SuccessFully ";

@@ -13,9 +13,9 @@ namespace FirstProject_Mvc.PLL.interfaces
 
 		public T Get(int id);
 
-		public int Delete(T item);
-		public int Update(T item);
-		public int Add(T item);
+		public void Delete(T item);
+		public void Update(T item);
+		public void Add(T item);
 
 	}
 }
