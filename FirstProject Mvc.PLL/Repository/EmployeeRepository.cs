@@ -23,6 +23,9 @@ namespace FirstProject_Mvc.PLL.Repository
 			return _application.Employee.Where(e => e.Address == address);
 		}
 
+		public IQueryable<Employee> GetEmployeeByName(string Name)
+		=>_application.Employee.Where(E => E.Name.ToLower().Contains(Name.ToLower()));
+
 		#region MyRegion
 		//      public EmployeeRepository(ApplicationDbContext _Dbcontext)
 		//      {

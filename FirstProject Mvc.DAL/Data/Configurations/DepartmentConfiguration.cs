@@ -16,6 +16,10 @@ namespace FirstProject_Mvc.DAL.Data.Configurations
             builder.Property(d => d.ID).UseIdentityColumn(10, 10);
             //builder.Property(d => d.Name).IsRequired().HasColumnType("varchar");
             //builder.Property(d => d.Code).IsRequired().HasColumnType("varchar");
+
+            builder.HasMany(E => E.employees)
+                .WithOne(D => D.Department)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 

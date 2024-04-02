@@ -1,6 +1,10 @@
-﻿@model Employee
+﻿
+@model EmployeeViewModel
 @{
     ViewData["Title"] = "Details";
+}
+@{
+	var dept = new SelectList(ViewData["Department"] as IEnumerable<Department>, nameof(Department.ID), nameof(Department.Name));
 }
 
 <h1 class="text-info">Details  @Model.Name</h1>
@@ -52,7 +56,12 @@
 	<span asp-validation-for="PhoneNumber"></span>
 </dev>
 
-
+<dev class="form-group">
+	<label class="col-form-label  " asp-for="Department"></label>
+	<select class="form-control" asp-for="DepartmentId" asp-items="@dept" readonly>
+		<option value="@null"> -- select Department -- </option>
+	</select>
+</dev>
 
 @*    <dev class="form-group ">
 	<label class="col-form-label  " asp-for="EmpType"></label>

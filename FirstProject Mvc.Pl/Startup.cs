@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FirstProject_Mvc.PLL.Repository;
+using AspNetCoreHero.ToastNotification;
+using FirstProject_Mvc.Pl.Helpersprofile;
+
 namespace FirstProject_Mvc.Pl
 {
     public class Startup
@@ -36,12 +39,28 @@ namespace FirstProject_Mvc.Pl
                 option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionStrings"))
 
                 
-                ) ; 
+                ) ;
+            services.AddNotyf(con =>
+            {
 
+                con.Position = NotyfPosition.TopRight;
+                con.DurationInSeconds = 10;
+                con.IsDismissable = true;
+
+			}) ;
+
+            services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
+   //         services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+   //         {
+   //             ProgressBar = true,
+   //             PositionClass =ToastPositions.TopRight,
+   //             CloseButton = true
+			//});
             services.AddControllersWithViews();
 
             services.AddScoped<IdepartmentRepository, DepartmentRepository >();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository >();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<Iunitofwork, UnitOfwork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

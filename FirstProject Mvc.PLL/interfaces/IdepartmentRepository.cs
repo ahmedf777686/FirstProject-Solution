@@ -16,7 +16,7 @@ namespace FirstProject_Mvc.PLL.interfaces
         //public int Delete(Department department);
         //public int Update(Department department);
         //public int Add(Department department);
-
+        public IEnumerable<Department> GetDepartmentsByName(string inputData);
 
     }
 }

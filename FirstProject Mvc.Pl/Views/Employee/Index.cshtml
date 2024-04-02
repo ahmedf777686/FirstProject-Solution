@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Employee>
+﻿@model IEnumerable<EmployeeViewModel>
 @{
 	ViewData["Title"] = "Index";
 }
@@ -18,6 +18,22 @@
 
 @if (Model.Count() > 0)
 {
+
+	<dev class="row   justify-content-center align-items-center  ">
+		<form asp-action="index" class=" row col-8 offset-2">
+
+			<dev class=" row col-8">
+				<input / type="text" name="inputData" placeholder="Search By Name" class="form form-control">
+
+			</dev>
+			<dev class="col-4 ">
+
+				<input / type="submit" value="searech" class="btn btn-success">
+			</dev>
+		</form>
+	</dev>
+<br />
+<br />
 	<table class="table table-striped table-hover">
 		<thead >
 			<tr>
@@ -25,6 +41,8 @@
 				<th>@Html.DisplayNameFor(e => e.Age)</th>
 
 				<th>@Html.DisplayNameFor(e => e.Salary)</th>
+				<th>@Html.DisplayNameFor(e => e.Department)</th>
+
 				<th>@Html.DisplayNameFor(e => e.IsActive)</th>
 
 				<th>@Html.DisplayNameFor(e => e.Gender)</th>
@@ -53,6 +71,8 @@
 					<th>@item.Name</th>
 					<th>@item.Age</th>
 					<th>@Html.DisplayFor(m => item.Salary)</th>
+					<th>@Html.DisplayFor(m => item.Department.Name)</th>
+
 					<th>@Html.DisplayFor(m => item.IsActive)</th>
 					<th>@item.Gender</th>
 					<th>@Html.DisplayFor(m => item.Email)</th>
@@ -60,7 +80,7 @@
 					
 					
 					@* <th>@item.PhoneNumber</th> *@
-					x
+				
 					@* <th>@item.EmpType</th> *@
 					@* <th>@item.HiringDate.Year</th> *@
 					<partial name="_Buttonspartial" model="@item.id"></partial>
@@ -74,6 +94,9 @@ else
 	<dev class="mt-5 w-75 text-info">
 
 	<h3>There is No Employee :(</h3>
+	<br />
+		<a class="btn btn-outline-info" asp-action="index" asp-controller="employee"> Back To List</a>
+
 
 </dev>
 }

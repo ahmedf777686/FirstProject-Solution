@@ -1,8 +1,10 @@
-﻿@model Employee
+﻿@model EmployeeViewModel
 @{
     ViewData["Title"] = "Delete";
 }
-
+@{
+	var dept = new SelectList(ViewData["Department"] as IEnumerable<Department>, nameof(Department.ID), nameof(Department.Name));
+}
 <h1 class="text-danger">Are You Sure to  Delete Employee </h1>
 
 <form asp-action="Delete">
