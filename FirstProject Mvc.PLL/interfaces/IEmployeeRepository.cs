@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FirstProject_Mvc.PLL.interfaces
 {
 	public interface IEmployeeRepository :IGenericReposiory<Employee>
-	{
+	{  
 
 		public IQueryable<Employee>  GetEmpByAddress(string address);
 		public IQueryable<Employee> GetEmployeeByName(String Name);
