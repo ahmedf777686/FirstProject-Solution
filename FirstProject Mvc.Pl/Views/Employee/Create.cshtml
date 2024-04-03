@@ -8,7 +8,7 @@
 }
 <h1 class="text-info">Create New Employee </h1>
 
-<form asp-action="Create">
+<form asp-action="Create" enctype="multipart/form-data">
 
 
 
@@ -86,6 +86,12 @@
 		<input class="form-control" asp-for="HiringDate" />
 		<span class="text-danger" asp-validation-for="HiringDate"></span>
 		<br />
+	</dev>
+		<dev class="form-group ">
+		<label class="col-form-label  " asp-for="Image"></label>
+		<input class="form-control-file" type="file" asp-for="Image" />
+	
+		
 	</dev>
 	<br />
 	<input type="submit" value="create" class="btn btn-danger" /> |

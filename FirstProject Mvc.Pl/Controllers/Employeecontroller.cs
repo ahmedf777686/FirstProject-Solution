@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using AutoMapper;
 using FirstProject_Mvc.DAL.Models;
+using FirstProject_Mvc.Pl.Helpersprofile;
 using FirstProject_Mvc.Pl.ViewsModels;
 using FirstProject_Mvc.PLL.interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -55,10 +56,12 @@ namespace FirstProject_Mvc.Pl.Controllers
 			return View();
 		}
 		[HttpPost]
+
 		public IActionResult Create(EmployeeViewModel employeeVM)
 		{
 			if (ModelState.IsValid)
 			{
+				employeeVM.ImageName =DocumentSettins.UploadFile(employeeVM.Image, "Images");
 				var emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVM);
 				 _Unitofwork.EmployeeRepository.Add(emp);
 				var count = _Unitofwork.Complete();

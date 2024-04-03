@@ -1,4 +1,5 @@
 ﻿using FirstProject_Mvc.DAL.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -38,5 +39,9 @@ namespace FirstProject_Mvc.Pl.ViewsModels
 
 		public int? DepartmentId { get; set; }
 		public virtual Department Department { get; set; }
-	}
+
+        public string ImageName { get; set; }
+
+        public  IFormFile  Image { get; set; }
+    }
 }
