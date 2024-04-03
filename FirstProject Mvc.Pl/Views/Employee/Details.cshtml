@@ -8,17 +8,17 @@
 
 <h1 class="text-info">Details  @Model.Name</h1>
 
-@* <dev class="justify-content-center align-items-center >
 
-	<img src="~/Files/Images/@Model.ImageName" width="40" class="rounded-circle" />
+<dev class="d-flex justify-content-center align-items-center  ">
+	<img src="~/Files/Images/@Model.ImageName" width="99px" class=" img-fluid" />
+</dev>
 
-</dev> *@
 
 <dev class="form-group ">
 	<label class="col-form-label  " asp-for="Name"></label>
 	<input class="form-control" asp-for="Name" readonly />
 	<span asp-validation-for="Name"></span>
-</dev>	
+</dev>
 
 <dev class="form-group ">
 	<label class="col-form-label  " asp-for="Email"></label>
