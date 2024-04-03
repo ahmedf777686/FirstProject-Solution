@@ -1,4 +1,6 @@
 ﻿using FirstProject_Mvc.DAL.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ namespace FirstProject_Mvc.DAL.Data
 {
 
 
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext
         
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option ) :base(option)
@@ -29,8 +31,11 @@ namespace FirstProject_Mvc.DAL.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Department> departments { get; set; }
         public DbSet<Employee> Employee { get; set; }
+
+        public DbSet<IdentityUser> Users { get; set; }
     }
 }
