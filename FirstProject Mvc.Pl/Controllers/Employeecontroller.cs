@@ -101,6 +101,8 @@ namespace FirstProject_Mvc.Pl.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				employeeVm.ImageName = DocumentSettins.UploadFile(employeeVm.Image,"Images");
+				
 				var emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVm);
 			 _Unitofwork.EmployeeRepository.Update(emp);
 				_Unitofwork.Complete();
@@ -116,8 +118,10 @@ namespace FirstProject_Mvc.Pl.Controllers
 		public IActionResult Delete(int id)
 		{
 			ViewData["Department"] = _Unitofwork.DepartmentRepository.GetAll();
+			
 
 			var res = _Unitofwork.EmployeeRepository.Get(id);
+			TempData["ImageDeleted"] = res.ImageName;
 			var emp = Mapper.Map<Employee, EmployeeViewModel>(res);
 			return View(emp);
 		}
@@ -131,9 +135,12 @@ namespace FirstProject_Mvc.Pl.Controllers
 			}
 			else
 			{
+				employeeVm.ImageName = TempData["ImageDeleted"] as string;
+				DocumentSettins.DeleteFile(employeeVm.ImageName, "Images");
 				var Emp = Mapper.Map<EmployeeViewModel, Employee>(employeeVm);
 				_Unitofwork.EmployeeRepository.Delete(Emp);
 				var count = _Unitofwork.Complete();
+				
 				Notyf.Error("Employee is Delete SuccessFully");
 				return RedirectToAction(nameof(Index));
 				
